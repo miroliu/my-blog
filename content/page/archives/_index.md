@@ -5,10 +5,10 @@ description: 文章归档页面
 
 # 文章归档
 
-{{ range .Site.RegularPages.GroupByDate "2006年" }}
-## {{ .Key }}
+{{ range $year, $posts := where .Site.RegularPages "Type" "post" | groupByDate "2006" }}
+## {{ $year }}
 
-{{ range .Pages }}
-- {{ .Date.Format "01月02日" }} - [{{ .Title }}]({{ .RelPermalink }})
+{{ range $posts }}
+- **{{ .Date.Format "2006-01-02" }}**: [{{ .Title }}]({{ .RelPermalink }})
 {{ end }}
 {{ end }}
