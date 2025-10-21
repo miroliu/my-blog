@@ -2,13 +2,10 @@
 title: hugo 使用教程
 description: hugo的 使用教程
 draft: false
-date: 2025-10-21
+date: 2025-10-21T18:38:36+08:00
 tags:
   - hugo
 ---
-
-
-
 
 ## 📝 ​**Front Matter 属性详解**​
 
@@ -137,7 +134,7 @@ date:     # 必须有日期（Hugo自动生成）
 draft:    # 明确是否为草稿
 ```
 
-### ​**2. SEO优化**​
+### ​**2. SEO 优化**​
 
 ```
 description: "50-160字符的吸引人描述"
