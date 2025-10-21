@@ -18,7 +18,7 @@ subtitle = "却忆携诗花底看，回头又是一年春。"
 
 [sidebar.avatar]
 enabled = true
-src = "img/avatar.png"
+src = "/avatar.png"
 
 [article]
 headingAnchor = false
