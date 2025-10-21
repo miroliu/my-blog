@@ -13,9 +13,9 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "post/hello-world/index.md",
+                "file": "post/math-typesetting/index.md",
                 "mode": "source",
-                "source": true
+                "source": false
               },
               "icon": "lucide-file",
               "title": "index"
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "post/hello-world/index.md",
+                "file": "post/math-typesetting/index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -113,7 +113,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "post/hello-world/index.md",
+                "file": "post/math-typesetting/index.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "post/hello-world/index.md",
+                "file": "post/math-typesetting/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,13 +171,16 @@
   },
   "active": "a4ca561cc0d75183",
   "lastOpenFiles": [
+    "post/image-gallery/index.md",
+    "post/markdown-syntax/index.md",
+    "post/math-typesetting/index.md",
+    "post/shortcodes/index.md",
+    "post/shortcodes/cover.jpg",
+    "post/hello-world/index.md",
     "posts/使用教程.md",
     "posts/心清如水.md",
-    "post/markdown-syntax/index.md",
-    "post/image-gallery/index.md",
     "post/image-gallery/2.jpg",
     "post/image-gallery/1.jpg",
-    "post/hello-world/index.md",
     "post/hello-world/cover.jpg",
     "posts/my-first-post.md",
     "posts",
@@ -187,9 +190,6 @@
     "page/archives/index.md",
     "page/links/index.md",
     "page/search/index.md",
-    "post/math-typesetting/index.md",
-    "post/shortcodes/cover.jpg",
-    "_index.md",
-    "post/shortcodes/index.md"
+    "_index.md"
   ]
 }
