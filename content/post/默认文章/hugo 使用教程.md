@@ -1,4 +1,14 @@
-很好！这是 Hugo 文章的标准 Front Matter（前置元数据）。让我详细解释每个属性的含义和用法：
+---
+title: Image gallery
+description: Create beautiful interactive image gallery using Markdown
+draft: false
+date: 2025-10-21
+tags:
+  - hugo
+---
+
+
+
 
 ## 📝 ​**Front Matter 属性详解**​
 
@@ -192,5 +202,3 @@ hugo -D
 # 实时预览（含草稿）
 hugo server -D
 ```
-
-现在你可以根据需求调整这些属性了！记得将 `draft: true` 改为 `draft: false` 才能正式发布文章。
