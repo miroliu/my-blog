@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "posts/my-first-post.md",
+                "file": "post/image-gallery/index.md",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "my-first-post"
+              "title": "index"
             }
           }
         ],
@@ -109,7 +109,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "posts/my-first-post.md",
+                "file": "post/image-gallery/index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,7 +119,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "my-first-post 的反向链接列表"
+              "title": "index 的反向链接列表"
             }
           },
           {
@@ -128,12 +128,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "posts/my-first-post.md",
+                "file": "post/image-gallery/index.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "my-first-post 的出链列表"
+              "title": "index 的出链列表"
             }
           },
           {
@@ -157,13 +157,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "posts/my-first-post.md",
+                "file": "post/image-gallery/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "my-first-post 的大纲"
+              "title": "index 的大纲"
             }
           }
         ]
@@ -186,12 +186,18 @@
   },
   "active": "1baaf3d9d6295f4d",
   "lastOpenFiles": [
+    "posts/my-first-post.md",
+    "post/默认文章/my-first-post.md",
+    "post/默认文章/心清如水.md",
+    "post/默认文章/使用教程.md",
+    "post/默认文章/运维/运维学习路线.md",
+    "post/默认文章/运维",
+    "post/默认文章",
     "post/image-gallery/index.md",
     "post/markdown-syntax/index.md",
     "posts/心清如水.md",
     "posts/使用教程.md",
     "posts/运维/运维学习路线.md",
-    "posts/my-first-post.md",
     "_index.md",
     "post/math-typesetting/index.md",
     "post/shortcodes/index.md",
