@@ -1,5 +1,5 @@
 # 语言配置文件 - 只保留中文支持
-[zh]
+[zh-cn]
 languageName = "中文"
 languagedirection = "ltr"
 title = "miro"
