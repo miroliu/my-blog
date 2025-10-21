@@ -1,5 +1,5 @@
 ---
-title: Image gallery
+title: my-first-post
 description: Create beautiful interactive image gallery using Markdown
 draft: false
 date: 2025-10-21

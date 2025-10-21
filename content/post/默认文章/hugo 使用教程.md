@@ -1,5 +1,5 @@
 ---
-title: Image gallery
+title: hugo 使用教程
 description: Create beautiful interactive image gallery using Markdown
 draft: false
 date: 2025-10-21
