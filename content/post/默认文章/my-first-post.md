@@ -1,6 +1,6 @@
 ---
 title: my-first-post
-description: Create beautiful interactive image gallery using Markdown
+description: 第一篇博客
 draft: false
 date: 2025-10-21
 ---

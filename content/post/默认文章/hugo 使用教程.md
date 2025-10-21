@@ -1,6 +1,6 @@
 ---
 title: hugo 使用教程
-description: Create beautiful interactive image gallery using Markdown
+description: hugo的 使用教程
 draft: false
 date: 2025-10-21
 tags:
