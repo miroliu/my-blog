@@ -1,12 +1,72 @@
-# Configure main menu and social menu
-#[[main]]
-#identifier = "home"
-#name = "Home"
-#url = "/"
-#[main.params]
-#icon = "home"
-#newtab = true
+# 配置主导航菜单和社交菜单
 
+# 中文菜单
+[[languages.zh.menu.main]]
+identifier = "home"
+name = "主页"
+url = "/"
+priority = 1
+[languages.zh.menu.main.params]
+icon = "home"
+
+[[languages.zh.menu.main]]
+identifier = "archives"
+name = "归档"
+url = "/archives/"
+priority = 2
+[languages.zh.menu.main.params]
+icon = "archive"
+
+[[languages.zh.menu.main]]
+identifier = "search"
+name = "搜索"
+url = "/search/"
+priority = 3
+[languages.zh.menu.main.params]
+icon = "search"
+
+[[languages.zh.menu.main]]
+identifier = "links"
+name = "链接"
+url = "/links/"
+priority = 4
+[languages.zh.menu.main.params]
+icon = "link"
+
+# 英文菜单（保留英文支持）
+[[languages.en.menu.main]]
+identifier = "home"
+name = "Home"
+url = "/en/"
+priority = 1
+[languages.en.menu.main.params]
+icon = "home"
+
+[[languages.en.menu.main]]
+identifier = "archives"
+name = "Archives"
+url = "/en/archives/"
+priority = 2
+[languages.en.menu.main.params]
+icon = "archive"
+
+[[languages.en.menu.main]]
+identifier = "search"
+name = "Search"
+url = "/en/search/"
+priority = 3
+[languages.en.menu.main.params]
+icon = "search"
+
+[[languages.en.menu.main]]
+identifier = "links"
+name = "Links"
+url = "/en/links/"
+priority = 4
+[languages.en.menu.main.params]
+icon = "link"
+
+# 社交菜单
 [[social]]
 identifier = "github"
 name = "GitHub"
