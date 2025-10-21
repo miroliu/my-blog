@@ -1,17 +1,21 @@
 # Configure main menu and social menu
-#[[main]]
-#identifier = "home"
-#name = "Home"
-#url = "/"
-#[main.params]
-#icon = "home"
-#newtab = true
+[[main]]
+name = "主页"
+url = "/"
+weight = 1
 
-[[social]]
-identifier = "github"
-name = "GitHub"
-url = "https://github.com/miroliu"
+[[main]]
+name = "归档"
+url = "/page/archives/"
+weight = 2
 
-[social.params]
-icon = "brand-github"
+[[main]]
+name = "搜索"
+url = "/page/search/"
+weight = 3
+
+[[main]]
+name = "链接"
+url = "/page/links/"
+weight = 4
 
