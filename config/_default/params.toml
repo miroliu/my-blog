@@ -35,15 +35,15 @@ type = "search"
 
 [[widgets.homepage]]
 type = "archives"
-
-[widgets.homepage.params]
-limit = 5
+params = {
+    limit = 5
+}
 
 [[widgets.homepage]]
 type = "categories"
-
-[widgets.homepage.params]
-limit = 10
+params = {
+    limit = 10
+}
 
 [[widgets.homepage]]
 type = "tag-cloud"
