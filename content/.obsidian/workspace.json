@@ -11,12 +11,14 @@
             "id": "a4ca561cc0d75183",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "post/hello-world/cover.jpg"
+                "file": "post/hello-world/index.md",
+                "mode": "source",
+                "source": true
               },
-              "icon": "lucide-image",
-              "title": "cover"
+              "icon": "lucide-file",
+              "title": "index"
             }
           }
         ]
@@ -92,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "post/hello-world/cover.jpg",
+                "file": "post/hello-world/index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "cover 的反向链接列表"
+              "title": "index 的反向链接列表"
             }
           },
           {
@@ -111,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "post/hello-world/cover.jpg",
+                "file": "post/hello-world/index.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "cover 的出链列表"
+              "title": "index 的出链列表"
             }
           },
           {
@@ -140,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "post/hello-world/cover.jpg",
+                "file": "post/hello-world/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "cover 的大纲"
+              "title": "index 的大纲"
             }
           }
         ]
@@ -169,13 +171,18 @@
   },
   "active": "a4ca561cc0d75183",
   "lastOpenFiles": [
+    "posts/使用教程.md",
+    "posts/心清如水.md",
     "post/markdown-syntax/index.md",
-    "post/image-gallery/1.jpg",
+    "post/image-gallery/index.md",
     "post/image-gallery/2.jpg",
-    "post/hello-world/cover.jpg",
-    "post/运维/运维学习路线.md",
-    "post/运维",
+    "post/image-gallery/1.jpg",
     "post/hello-world/index.md",
+    "post/hello-world/cover.jpg",
+    "posts/my-first-post.md",
+    "posts",
+    "posts/运维/运维学习路线.md",
+    "posts/运维",
     "categories/example-category/_index.md",
     "page/archives/index.md",
     "page/links/index.md",
