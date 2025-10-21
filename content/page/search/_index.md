@@ -3,6 +3,8 @@ title: 搜索
 description: 文章搜索页面
 ---
 
-# 搜索
+{{< search.instant >}}
 
-这里是搜索页面。
+# 搜索结果
+
+{{< search.result >}}
