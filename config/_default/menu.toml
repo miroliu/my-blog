@@ -1,33 +1,21 @@
-# 配置主导航菜单和社交菜单
-
-# 主导航菜单 - 移除图标引用以避免错误
+# 简化的中文菜单配置
 [[main]]
-identifier = "home"
 name = "主页"
 url = "/"
-priority = 1
+weight = 1
 
 [[main]]
-identifier = "archives"
 name = "归档"
 url = "/archives/"
-priority = 2
+weight = 2
 
 [[main]]
-identifier = "search"
 name = "搜索"
 url = "/search/"
-priority = 3
+weight = 3
 
 [[main]]
-identifier = "links"
 name = "链接"
 url = "/links/"
-priority = 4
-
-# 社交菜单 - 移除图标引用以避免错误
-[[social]]
-identifier = "github"
-name = "GitHub"
-url = "https://github.com/miroliu"
+weight = 4
 
