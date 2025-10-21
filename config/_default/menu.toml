@@ -1,44 +1,33 @@
 # 配置主导航菜单和社交菜单
 
-# 主导航菜单 - 使用通用格式而不是语言特定格式
+# 主导航菜单 - 移除图标引用以避免错误
 [[main]]
 identifier = "home"
 name = "主页"
 url = "/"
 priority = 1
-[main.params]
-icon = "home"
 
 [[main]]
 identifier = "archives"
 name = "归档"
 url = "/archives/"
 priority = 2
-[main.params]
-icon = "archive"
 
 [[main]]
 identifier = "search"
 name = "搜索"
 url = "/search/"
 priority = 3
-[main.params]
-icon = "search"
 
 [[main]]
 identifier = "links"
 name = "链接"
 url = "/links/"
 priority = 4
-[main.params]
-icon = "link"
 
-# 社交菜单
+# 社交菜单 - 移除图标引用以避免错误
 [[social]]
 identifier = "github"
 name = "GitHub"
 url = "https://github.com/miroliu"
-
-[social.params]
-icon = "brand-github"
 
