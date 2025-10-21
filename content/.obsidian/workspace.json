@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "post/math-typesetting/index.md",
+                "file": "posts/my-first-post.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "my-first-post"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "post/math-typesetting/index.md",
+                "file": "posts/my-first-post.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "index 的反向链接列表"
+              "title": "my-first-post 的反向链接列表"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "post/math-typesetting/index.md",
+                "file": "posts/my-first-post.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "index 的出链列表"
+              "title": "my-first-post 的出链列表"
             }
           },
           {
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "post/math-typesetting/index.md",
+                "file": "posts/my-first-post.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "index 的大纲"
+              "title": "my-first-post 的大纲"
             }
           }
         ]
@@ -171,25 +171,25 @@
   },
   "active": "a4ca561cc0d75183",
   "lastOpenFiles": [
-    "post/image-gallery/index.md",
+    "posts/心清如水.md",
+    "posts/my-first-post.md",
+    "posts/使用教程.md",
     "post/markdown-syntax/index.md",
+    "posts/运维/运维学习路线.md",
+    "_index.md",
     "post/math-typesetting/index.md",
+    "post/image-gallery/index.md",
     "post/shortcodes/index.md",
     "post/shortcodes/cover.jpg",
     "post/hello-world/index.md",
-    "posts/使用教程.md",
-    "posts/心清如水.md",
     "post/image-gallery/2.jpg",
     "post/image-gallery/1.jpg",
     "post/hello-world/cover.jpg",
-    "posts/my-first-post.md",
     "posts",
-    "posts/运维/运维学习路线.md",
     "posts/运维",
     "categories/example-category/_index.md",
     "page/archives/index.md",
     "page/links/index.md",
-    "page/search/index.md",
-    "_index.md"
+    "page/search/index.md"
   ]
 }
