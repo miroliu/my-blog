@@ -1987,4 +1987,364 @@ $(document).ready(function() {
     // 绑定退出登录事件
     $('#logout').on('click', logout);
     
-    // 根据
+    // 根据当前路径加载对应的视图
+    const path = window.location.pathname;
+    if (path === '/products' || path.startsWith('/products/')) {
+        loadProductsView();
+    } else if (path === '/login') {
+        loadLoginView();
+    } else if (path === '/register') {
+        loadRegisterView();
+    } else if (path === '/profile') {
+        loadProfileView();
+    }
+});
+
+// 加载产品列表视图
+async function loadProductsView() {
+    showLoading();
+    try {
+        const page = getUrlParam('page') || 1;
+        const category = getUrlParam('category') || '';
+        const response = await apiRequest(`/products?page=${page}&category=${category}`, 'GET');
+        
+        let content = `
+            <h1 class="mb-4">产品列表</h1>
+            <div class="row">
+        `;
+        
+        response.products.forEach(product => {
+            content += `
+                <div class="col-md-4">
+                    <div class="card product-card">
+                        <img src="${product.image_url || '/static/images/placeholder.jpg'}" 
+                             class="card-img-top product-image" 
+                             alt="${product.name}">
+                        <div class="card-body">
+                            <h5 class="card-title">${product.name}</h5>
+                            <p class="card-text">${product.description.substring(0, 100)}...</p>
+                            <div class="mt-auto">
+                                <p class="price">¥${product.price.toFixed(2)}</p>
+                                <button class="btn btn-primary view-product" data-id="${product.id}">查看详情</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        content += `</div>`;
+        
+        // 添加分页
+        content += `
+            <div class="mt-4">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item ${response.pagination.page === 1 ? 'disabled' : ''}">
+                            <a class="page-link" href="?page=${response.pagination.page - 1}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+        `;
+        
+        for (let i = 1; i <= response.pagination.pages; i++) {
+            content += `
+                <li class="page-item ${i === response.pagination.page ? 'active' : ''}">
+                    <a class="page-link" href="?page=${i}">${i}</a>
+                </li>
+            `;
+        }
+        
+        content += `
+                        <li class="page-item ${response.pagination.page === response.pagination.pages ? 'disabled' : ''}">
+                            <a class="page-link" href="?page=${response.pagination.page + 1}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        `;
+        
+        $('#content').html(content);
+        
+        // 绑定查看详情按钮事件
+        $('.view-product').on('click', function() {
+            const productId = $(this).data('id');
+            navigateTo(`/products/${productId}`);
+        });
+    } catch (error) {
+        showMessage(error.message, 'error');
+    } finally {
+        hideLoading();
+    }
+}
+
+// 加载登录视图
+function loadLoginView() {
+    const content = `
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center">用户登录</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="login-form">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">用户名</label>
+                                <input type="text" class="form-control" id="username" name="username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">密码</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-block">登录</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center">
+                        <p>还没有账号？ <a href="/register">立即注册</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    $('#content').html(content);
+    
+    // 绑定表单提交事件
+    $('#login-form').on('submit', async function(e) {
+        e.preventDefault();
+        
+        const username = $('#username').val();
+        const password = $('#password').val();
+        
+        try {
+            const response = await apiRequest('/login', 'POST', { username, password });
+            setToken(response.token);
+            checkAuth();
+            showMessage('登录成功', 'success');
+            navigateTo('/');
+        } catch (error) {
+            showMessage(error.message, 'error');
+        }
+    });
+}
+
+// 加载注册视图
+function loadRegisterView() {
+    const content = `
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center">用户注册</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="register-form">
+                            <div class="mb-3">
+                                <label for="reg-username" class="form-label">用户名</label>
+                                <input type="text" class="form-control" id="reg-username" name="username" required minlength="3" maxlength="50">
+                            </div>
+                            <div class="mb-3">
+                                <label for="reg-email" class="form-label">邮箱</label>
+                                <input type="email" class="form-control" id="reg-email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="reg-name" class="form-label">姓名</label>
+                                <input type="text" class="form-control" id="reg-name" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="reg-password" class="form-label">密码</label>
+                                <input type="password" class="form-control" id="reg-password" name="password" required minlength="6">
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-block">注册</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center">
+                        <p>已有账号？ <a href="/login">立即登录</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    $('#content').html(content);
+    
+    // 绑定表单提交事件
+    $('#register-form').on('submit', async function(e) {
+        e.preventDefault();
+        
+        const username = $('#reg-username').val();
+        const email = $('#reg-email').val();
+        const name = $('#reg-name').val();
+        const password = $('#reg-password').val();
+        
+        try {
+            await apiRequest('/register', 'POST', { username, email, password, name });
+            showMessage('注册成功，请登录', 'success');
+            navigateTo('/login');
+        } catch (error) {
+            showMessage(error.message, 'error');
+        }
+    });
+}
+
+// 加载个人资料视图
+async function loadProfileView() {
+    if (!getToken()) {
+        navigateTo('/login');
+        return;
+    }
+    
+    showLoading();
+    try {
+        const response = await apiRequest('/users/me', 'GET');
+        const user = response.user;
+        
+        const content = `
+            <h1 class="mb-4">个人资料</h1>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">账号信息</h5>
+                    <p class="card-text"><strong>ID:</strong> ${user.id}</p>
+                    <p class="card-text"><strong>用户名:</strong> ${user.username}</p>
+                    <p class="card-text"><strong>邮箱:</strong> ${user.email}</p>
+                    <p class="card-text"><strong>姓名:</strong> ${user.name}</p>
+                    <p class="card-text"><strong>角色:</strong> ${user.role}</p>
+                    <p class="card-text"><strong>注册时间:</strong> ${new Date(user.created_at).toLocaleString()}</p>
+                    <p class="card-text"><strong>更新时间:</strong> ${new Date(user.updated_at).toLocaleString()}</p>
+                    
+                    <div class="mt-4">
+                        <button id="edit-profile" class="btn btn-primary me-2">编辑资料</button>
+                        <button id="change-password" class="btn btn-secondary">修改密码</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 编辑资料模态框 -->
+            <div class="modal fade" id="edit-profile-modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">编辑个人资料</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="edit-profile-form">
+                                <div class="mb-3">
+                                    <label for="edit-username" class="form-label">用户名</label>
+                                    <input type="text" class="form-control" id="edit-username" name="username" value="${user.username}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="edit-email" class="form-label">邮箱</label>
+                                    <input type="email" class="form-control" id="edit-email" name="email" value="${user.email}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="edit-name" class="form-label">姓名</label>
+                                    <input type="text" class="form-control" id="edit-name" name="name" value="${user.name}" required>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                            <button type="submit" form="edit-profile-form" class="btn btn-primary">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 修改密码模态框 -->
+            <div class="modal fade" id="change-password-modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">修改密码</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="change-password-form">
+                                <div class="mb-3">
+                                    <label for="old-password" class="form-label">旧密码</label>
+                                    <input type="password" class="form-control" id="old-password" name="old_password" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="new-password" class="form-label">新密码</label>
+                                    <input type="password" class="form-control" id="new-password" name="new_password" required minlength="6">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                            <button type="submit" form="change-password-form" class="btn btn-primary">修改</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        $('#content').html(content);
+        
+        // 绑定编辑资料按钮事件
+        $('#edit-profile').on('click', function() {
+            const editProfileModal = new bootstrap.Modal(document.getElementById('edit-profile-modal'));
+            editProfileModal.show();
+        });
+        
+        // 绑定修改密码按钮事件
+        $('#change-password').on('click', function() {
+            const changePasswordModal = new bootstrap.Modal(document.getElementById('change-password-modal'));
+            changePasswordModal.show();
+        });
+        
+        // 绑定编辑资料表单提交事件
+        $('#edit-profile-form').on('submit', async function(e) {
+            e.preventDefault();
+            
+            const username = $('#edit-username').val();
+            const email = $('#edit-email').val();
+            const name = $('#edit-name').val();
+            
+            try {
+                await apiRequest('/users/me', 'PUT', { username, email, name });
+                showMessage('资料更新成功', 'success');
+                const editProfileModal = bootstrap.Modal.getInstance(document.getElementById('edit-profile-modal'));
+                editProfileModal.hide();
+                loadProfileView(); // 重新加载页面以显示更新后的数据
+            } catch (error) {
+                showMessage(error.message, 'error');
+            }
+        });
+        
+        // 绑定修改密码表单提交事件
+        $('#change-password-form').on('submit', async function(e) {
+            e.preventDefault();
+            
+            const oldPassword = $('#old-password').val();
+            const newPassword = $('#new-password').val();
+            
+            try {
+                await apiRequest('/users/me/change-password', 'POST', { old_password: oldPassword, new_password: newPassword });
+                showMessage('密码修改成功', 'success');
+                const changePasswordModal = bootstrap.Modal.getInstance(document.getElementById('change-password-modal'));
+                changePasswordModal.hide();
+                // 清空表单
+                this.reset();
+            } catch (error) {
+                showMessage(error.message, 'error');
+            }
+        });
+    } catch (error) {
+        showMessage(error.message, 'error');
+        if (error.message.includes('未认证') || error.message.includes('无效')) {
+            removeToken();
+            navigateTo('/login');
+        }
+    } finally {
+        hideLoading();
+    }
+})根据
