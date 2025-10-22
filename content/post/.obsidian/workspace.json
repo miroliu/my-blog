@@ -185,6 +185,8 @@
   },
   "active": "324d3c38c6c7ceb4",
   "lastOpenFiles": [
+    "编程开发/全栈开发实战：构建现代Web应用.md",
+    "编程开发/人工智能应用开发实战：从理论到实践.md",
     "Go/Go语言项目实战：构建Web应用.md",
     "Go/Go语言标准库详解与实用技巧.md",
     "Go/Go语言并发编程：Goroutines与Channels详解.md",
@@ -212,9 +214,7 @@
     "桌面运维/桌面运维学习路线.md",
     "Java/Java高级教程.md",
     "Java/Java面向对象编程.md",
-    "Java/Java基础教程.md",
     "Java",
-    "编程开发/机器学习学习路线.md",
     "编程开发"
   ]
 }
