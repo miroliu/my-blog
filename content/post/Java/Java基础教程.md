@@ -8,6 +8,7 @@ license:
 hidden: false
 comments: true
 draft: false
+categories: ["Java"]
 ---
 
 # Java基础教程

@@ -5,6 +5,7 @@ draft: false
 date: 2025-10-21T18:38:36+08:00
 tags:
   - hugo
+categories: ["默认文章"]
 ---
 
 ## 📝 ​**Front Matter 属性详解**​
