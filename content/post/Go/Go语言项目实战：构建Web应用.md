@@ -2347,4 +2347,384 @@ async function loadProfileView() {
     } finally {
         hideLoading();
     }
-})根据
+})
+```
+
+### 5.3 构建和部署
+
+#### 5.3.1 构建脚本
+
+创建一个构建脚本，用于编译Go应用：
+
+```bash
+#!/bin/bash
+
+# build.sh
+set -e
+
+echo "开始构建Go Web应用..."
+
+# 设置Go环境变量
+export GO111MODULE=on
+export GOPROXY=https://goproxy.io,direct
+
+# 清理旧的构建产物
+rm -rf output
+mkdir -p output
+
+# 安装依赖
+echo "安装依赖..."
+go mod download
+
+# 构建应用
+echo "编译应用..."
+go build -o output/my-web-app ./cmd/server
+
+# 复制配置文件
+echo "复制配置文件..."
+cp .env.example output/
+cp -r web/ output/
+
+# 创建启动脚本
+cat > output/start.sh << 'EOF'
+#!/bin/bash
+
+# 检查是否存在.env文件，如果不存在则从示例文件复制
+if [ ! -f .env ]; then
+    echo "创建.env文件..."
+    cp .env.example .env
+fi
+
+# 启动应用
+echo "启动Go Web应用..."
+./my-web-app
+EOF
+
+# 设置执行权限
+chmod +x output/start.sh
+chmod +x output/my-web-app
+
+echo "构建完成！构建产物位于 output/ 目录"
+echo "使用以下命令启动应用："
+echo "cd output && ./start.sh"
+```
+
+#### 5.3.2 Docker部署
+
+创建Dockerfile，用于容器化部署：
+
+```dockerfile
+# Dockerfile
+FROM golang:1.20-alpine AS builder
+
+# 设置工作目录
+WORKDIR /app
+
+# 复制go.mod和go.sum文件
+COPY go.mod go.sum ./
+
+# 下载依赖
+RUN go mod download
+
+# 复制源代码
+COPY . .
+
+# 构建应用
+RUN go build -o my-web-app ./cmd/server
+
+# 第二阶段构建，使用alpine作为基础镜像
+FROM alpine:3.16
+
+# 设置工作目录
+WORKDIR /app
+
+# 复制构建产物和配置文件
+COPY --from=builder /app/my-web-app .
+COPY --from=builder /app/web ./web
+COPY .env.example .
+
+# 创建.env文件
+RUN cp .env.example .env
+
+# 暴露端口
+EXPOSE 8080
+
+# 启动应用
+CMD ["./my-web-app"]
+```
+
+创建docker-compose.yml文件，用于多容器部署：
+
+```yaml
+# docker-compose.yml
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: go-web-app
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - PORT=8080
+      - GIN_MODE=release
+      - DATABASE_URL=./data/data.db
+      - JWT_SECRET=your-secret-key-production
+    restart: unless-stopped
+```
+
+#### 5.3.3 部署步骤
+
+使用Docker部署应用：
+
+1. **构建Docker镜像**
+
+```bash
+docker build -t go-web-app:latest .
+```
+
+2. **使用docker-compose启动**
+
+```bash
+docker-compose up -d
+```
+
+3. **验证部署**
+
+```bash
+docker-compose ps
+```
+
+访问 http://localhost:8080 查看应用。
+
+## 第六章：测试与调试
+
+### 6.1 单元测试
+
+为核心功能编写单元测试：
+
+```go
+// internal/service/user_service_test.go
+package service
+
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/yourusername/my-web-app/internal/model"
+	"github.com/yourusername/my-web-app/mocks"
+)
+
+func TestUserService_Register(t *testing.T) {
+	// 创建模拟的存储库
+	mockRepo := new(mocks.UserRepository)
+
+	// 设置模拟行为
+	mockRepo.On("FindByUsername", "testuser").Return(nil, nil)
+	mockRepo.On("FindByEmail", "test@example.com").Return(nil, nil)
+	mockRepo.On("Create", &model.User{
+		Username: "testuser",
+		Email:    "test@example.com",
+		Name:     "Test User",
+		Role:     "user",
+	}).Return(nil)
+
+	// 创建服务
+	service := NewUserService(mockRepo)
+
+	// 测试注册功能
+	user, err := service.Register("testuser", "test@example.com", "password123", "Test User")
+
+	// 验证结果
+	assert.NoError(t, err)
+	assert.NotNil(t, user)
+	assert.Equal(t, "testuser", user.Username)
+	assert.Equal(t, "test@example.com", user.Email)
+	assert.Equal(t, "Test User", user.Name)
+	assert.Equal(t, "user", user.Role)
+
+	// 验证模拟调用
+	mockRepo.AssertExpectations(t)
+}
+```
+
+### 6.2 集成测试
+
+使用Gin的测试工具进行API集成测试：
+
+```go
+// cmd/server/main_test.go
+package main
+
+import (
+	"bytes"
+	"encoding/json"
+	"net/http"
+	"net/http/httptest"
+	"testing"
+
+	"github.com/gin-gonic/gin"
+	"github.com/stretchr/testify/assert"
+)
+
+func TestRegisterAPI(t *testing.T) {
+	// 设置测试模式
+	gin.SetMode(gin.TestMode)
+
+	// 创建路由
+	router := setupRouter()
+
+	// 创建测试请求
+	reqBody := map[string]string{
+		"username": "testuser",
+		"email":    "test@example.com",
+		"password": "password123",
+		"name":     "Test User",
+	}
+	bodyBytes, _ := json.Marshal(reqBody)
+	req := httptest.NewRequest("POST", "/api/register", bytes.NewBuffer(bodyBytes))
+	req.Header.Set("Content-Type", "application/json")
+
+	// 执行请求
+	w := httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+
+	// 验证响应
+	assert.Equal(t, http.StatusCreated, w.Code)
+
+	// 解析响应体
+	var response map[string]interface{}
+	json.Unmarshal(w.Body.Bytes(), &response)
+
+	// 验证响应内容
+	assert.Equal(t, "注册成功", response["message"])
+	userData, ok := response["user"].(map[string]interface{})
+	assert.True(t, ok)
+	assert.Equal(t, "testuser", userData["username"])
+	assert.Equal(t, "test@example.com", userData["email"])
+	assert.Equal(t, "Test User", userData["name"])
+}
+```
+
+### 6.3 日志和调试
+
+添加结构化日志和调试信息：
+
+```go
+// internal/middleware/logger.go
+package middleware
+
+import (
+	"encoding/json"
+	"time"
+
+	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
+)
+
+// LoggerWithZap 使用zap的日志中间件
+func LoggerWithZap() gin.HandlerFunc {
+	logger, _ := zap.NewProduction()
+	defer logger.Sync()
+
+	return func(c *gin.Context) {
+		// 开始时间
+		startTime := time.Now()
+
+		// 处理请求
+		c.Next()
+
+		// 结束时间
+		endTime := time.Now()
+		latency := endTime.Sub(startTime)
+
+		// 构建日志字段
+		fields := []zap.Field{
+			zap.String("method", c.Request.Method),
+			zap.String("path", c.Request.URL.Path),
+			zap.String("query", c.Request.URL.RawQuery),
+			zap.String("ip", c.ClientIP()),
+			zap.Int("status", c.Writer.Status()),
+			zap.Duration("latency", latency),
+			zap.String("user_agent", c.Request.UserAgent()),
+		}
+
+		// 根据状态码记录不同级别的日志
+		if len(c.Errors) > 0 {
+			logger.Error("Request error", append(fields, zap.String("error", c.Errors.String()))...)
+		} else if c.Writer.Status() >= 500 {
+			logger.Error("Server error", fields...)
+		} else if c.Writer.Status() >= 400 {
+			logger.Warn("Client error", fields...)
+		} else {
+			logger.Info("Request", fields...)
+		}
+	}
+}
+```
+
+## 第七章：总结与最佳实践
+
+### 7.1 项目总结
+
+在本项目中，我们使用Go语言构建了一个完整的Web应用，涵盖了以下关键技术点：
+
+1. **项目结构设计**：采用了清晰的分层架构，包括处理器层、服务层、存储库层和模型层
+2. **数据库交互**：使用GORM进行ORM映射和数据库操作
+3. **HTTP处理**：使用Gin框架处理HTTP请求和路由
+4. **认证授权**：实现了基于JWT的认证机制和角色权限控制
+5. **中间件实现**：创建了日志记录、错误处理、认证等中间件
+6. **前端集成**：使用HTML、CSS和JavaScript构建了简单的前端界面
+7. **容器化部署**：使用Docker和docker-compose实现了应用的容器化和编排
+8. **测试与调试**：添加了单元测试和集成测试，提高了代码质量
+
+### 7.2 Go Web开发最佳实践
+
+#### 7.2.1 代码组织
+
+- **使用分层架构**：控制器/处理器 -> 服务层 -> 存储库层 -> 数据模型
+- **遵循标准目录结构**：使用cmd、internal、pkg等目录组织代码
+- **接口抽象**：使用接口定义服务和存储库的行为，便于测试和替换实现
+
+#### 7.2.2 性能优化
+
+- **连接池管理**：合理配置数据库连接池参数
+- **缓存使用**：对频繁访问的数据使用缓存
+- **异步处理**：对耗时操作使用goroutine异步处理
+- **内存管理**：避免不必要的内存分配，注意切片和映射的预分配
+
+#### 7.2.3 安全考虑
+
+- **输入验证**：对所有用户输入进行严格验证
+- **密码加密**：使用bcrypt等安全算法加密存储密码
+- **参数绑定**：使用Gin的绑定功能，避免SQL注入
+- **HTTPS使用**：在生产环境中使用HTTPS
+- **CORS配置**：合理配置跨域资源共享
+
+#### 7.2.4 可维护性
+
+- **日志记录**：使用结构化日志，便于问题排查
+- **错误处理**：统一的错误处理机制
+- **配置管理**：使用环境变量或配置文件管理配置
+- **文档编写**：为API和关键函数添加文档注释
+- **测试覆盖**：编写单元测试和集成测试，确保代码质量
+
+### 7.3 后续优化方向
+
+1. **添加缓存**：使用Redis缓存热点数据
+2. **数据库优化**：添加索引，优化查询性能
+3. **API文档**：集成Swagger自动生成API文档
+4. **监控告警**：添加Prometheus和Grafana监控
+5. **CI/CD集成**：添加持续集成和持续部署流程
+6. **微服务拆分**：将单体应用拆分为微服务架构
+7. **国际化支持**：添加多语言支持
+
+## 结语
+
+通过本项目的实践，我们学习了如何使用Go语言构建现代化的Web应用。Go语言的简洁性、高性能和并发特性使其成为Web开发的理想选择。在实际项目中，我们应该根据具体需求选择合适的框架和工具，并遵循最佳实践，构建出稳定、高效、安全的Web应用。
+
+希望本文能够帮助你快速入门Go Web开发，并在实际项目中应用所学知识。Go语言生态系统正在不断发展壮大，有越来越多的优秀库和工具可供使用。持续学习和实践是掌握Go Web开发的关键。
+
+Happy coding with Go!"}]}}}
