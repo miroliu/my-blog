@@ -185,6 +185,7 @@
   },
   "active": "324d3c38c6c7ceb4",
   "lastOpenFiles": [
+    "Go/Go语言项目实战：构建Web应用.md",
     "Go/Go语言标准库详解与实用技巧.md",
     "Go/Go语言并发编程：Goroutines与Channels详解.md",
     "Go/Go语言进阶：结构体、接口与错误处理.md",
@@ -214,7 +215,6 @@
     "Java/Java基础教程.md",
     "Java",
     "编程开发/机器学习学习路线.md",
-    "编程开发/全栈开发学习路线.md",
     "编程开发"
   ]
 }
