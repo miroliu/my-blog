@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "桌面运维/桌面运维学习路线.md",
+                "file": "Java/Java高级教程.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "桌面运维学习路线"
+              "title": "Java高级教程"
             }
           },
           {
@@ -108,7 +108,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "桌面运维/桌面运维学习路线.md",
+                "file": "Java/Java高级教程.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "桌面运维学习路线 的反向链接列表"
+              "title": "Java高级教程 的反向链接列表"
             }
           },
           {
@@ -127,12 +127,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "桌面运维/桌面运维学习路线.md",
+                "file": "Java/Java高级教程.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "桌面运维学习路线 的出链列表"
+              "title": "Java高级教程 的出链列表"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "桌面运维/桌面运维学习路线.md",
+                "file": "Java/Java高级教程.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "桌面运维学习路线 的大纲"
+              "title": "Java高级教程 的大纲"
             }
           }
         ]
@@ -185,15 +185,19 @@
   },
   "active": "324d3c38c6c7ceb4",
   "lastOpenFiles": [
+    "Java/Java框架教程.md",
+    "桌面运维/桌面运维学习路线.md",
+    "Java/Java高级教程.md",
+    "Java/Java面向对象编程.md",
+    "Java/Java基础教程.md",
+    "Java",
     "编程开发/机器学习学习路线.md",
     "编程开发/全栈开发学习路线.md",
     "编程开发",
     "默认文章/心清如水.md",
-    "桌面运维/桌面运维学习路线.md",
     "默认文章/hugo 使用教程.md",
     "系统运维/系统运维学习路线.md",
     "系统运维/系统运维学习路线_B站视频推荐.md",
-    "桌面运维/桌面运维学习路线.md",
     "系统运维/系统运维，B站学习视频推荐.md",
     "系统运维/_index.md",
     "网络运维/网络运维学习路线.md",
