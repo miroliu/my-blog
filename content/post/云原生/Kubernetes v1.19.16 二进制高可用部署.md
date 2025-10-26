@@ -2,7 +2,7 @@
 title: "Kubernetes速成指南：从入门到实践"
 description: "全面介绍Kubernetes核心概念、组件架构和实用技巧，帮助读者快速掌握容器编排技术。"
 slug: "kubernetes-quick-start-guide"
-date: 2025-10-25T10:00:00+08:00
+date: 2025-10-25T18:00:00+08:00
 image: ""
 math: false
 license: "CC BY-NC-SA 4.0"
@@ -11,6 +11,8 @@ comments: true
 draft: false
 categories: ["云原生"]
 ---
+
+
 
 # Kubernetes速成指南：从入门到实践
 
