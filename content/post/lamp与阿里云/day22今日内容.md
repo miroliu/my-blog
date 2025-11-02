@@ -24,7 +24,7 @@ lnmp ==== linux + nginx + mysql + python
 
 ```
 
-![image-20220401094456165](pic/image-20220401094456165.png)
+![image-20220401094456165](/img/lamp/image-20220401094456165.png)
 
 
 
