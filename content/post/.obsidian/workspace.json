@@ -4,35 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "145829cec058ca6c",
+        "id": "fde72c44a6f6053c",
         "type": "tabs",
         "children": [
           {
-            "id": "324d3c38c6c7ceb4",
+            "id": "a57a242c84d3191d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Java/Java高级教程.md",
+                "file": "云原生/Kubernetes速成指南：从入门到实践 copy.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Java高级教程"
-            }
-          },
-          {
-            "id": "8c3a5daf8d8570eb",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "默认文章/hugo 使用教程.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "hugo 使用教程"
+              "title": "Kubernetes速成指南：从入门到实践 copy"
             }
           }
         ]
@@ -183,14 +169,23 @@
       "bases:创建新数据库": false
     }
   },
-  "active": "324d3c38c6c7ceb4",
+  "active": "a57a242c84d3191d",
   "lastOpenFiles": [
+    "云原生/Kubernetes开篇-核心概念与集群搭建指南.md",
+    "云原生/Kubernetes速成指南：从入门到实践 copy.md",
+    "云原生/云原生高级特性与最佳实践.md",
+    "云原生/Docker与容器化：从基础到实践.md",
+    "云原生/Apache Flink运维指南：核心要点与最佳实践.md",
+    "云原生/云原生基础，概念、原则与价值.md",
+    "数据库/MySQL数据库基础：安装、配置与基本操作.md",
+    "数据库/数据库性能优化实战：从查询到存储的全面优化.md",
+    "手写博客/多媒体测试.md",
     "手写博客/道德经动画版.md",
+    "默认文章/hugo 使用教程.md",
+    "Java/Java高级教程.md",
     "手写博客/多媒体测试 copy.md",
     "全栈编程/AI生成播客音频教程.md",
     "系统运维/黄金架构LNMP-高性能Web服务部署实战.md",
-    "云原生/Kubernetes开篇-核心概念与集群搭建指南.md",
-    "手写博客/多媒体测试.md",
     "手写博客/测试媒体播放能力.md",
     "手写博客/index.md",
     "手写博客",
@@ -215,21 +210,12 @@
     "桌面运维/pic",
     "桌面运维/day03今日内容.md",
     "系统运维/day10今日笔记.md",
-    "系统运维/day09昨日作业回顾.md",
     "系统运维/pic",
     "lamp与阿里云/pic",
-    "lamp与阿里云/day22今日内容.md",
     "lamp与阿里云/day22_lamp与阿里云.zip",
     "lamp与阿里云",
     "云原生/pic",
     "pic",
-    "云原生/02_docker实践.md",
-    "云原生/01_docker入门.md",
-    "系统运维/n8n与Dify：自动化与AI融合的典型应用与未来展望.md",
-    "系统运维/Dify安装教程：构建您的大模型应用开发平台.md",
-    "系统运维/n8n安装教程：从入门到部署的完整指南.md",
-    "系统运维/阿里DIF数据智能框架详解：从入门到进阶.md",
-    "系统运维/Linux运维必备：提升工作效率的第三方工具集.md",
     "全栈编程"
   ]
 }
