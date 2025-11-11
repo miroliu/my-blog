@@ -1,1 +1,24 @@
+<script>(function (d) { d.documentElement.classList.add('js'); })(document);</script>
+<style>
+    .js .site-subtitle,
+    .js .sidebar .site-subtitle,
+    .js .sidebar .subtitle,
+    .js .site-meta .site-subtitle,
+    .js .site-meta .subtitle,
+    .js .site-description,
+    .js [data-subtitle] {
+        opacity: 0;
+        transition: opacity .2s ease;
+    }
+
+    .js.poem-ready .site-subtitle,
+    .js.poem-ready .sidebar .site-subtitle,
+    .js.poem-ready .sidebar .subtitle,
+    .js.poem-ready .site-meta .site-subtitle,
+    .js.poem-ready .site-meta .subtitle,
+    .js.poem-ready .site-description,
+    .js.poem-ready [data-subtitle] {
+        opacity: 1;
+    }
+</style>
 <script src="/js/poem.js" defer></script>

@@ -15,6 +15,7 @@
       if (el) {
         el.textContent = text;
         el.setAttribute('data-subtitle', text);
+        document.documentElement.classList.add('poem-ready');
         return true;
       }
     }
