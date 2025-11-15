@@ -28,11 +28,8 @@
       if (!resp.ok) throw new Error('network');
       const data = await resp.json();
       const content = data && data.content;
-      const author = data && data.author;
-      const origin = (data && (data.origin || data.title)) || '';
       const line = content || '春江潮水连海平，海上明月共潮生。';
-      const suffix = (author || origin) ? (' —— ' + [author, origin].filter(Boolean).join('·')) : '';
-      return line + suffix;
+      return line;
     } catch (e) {
       return '但愿人长久，千里共婵娟。';
     }
