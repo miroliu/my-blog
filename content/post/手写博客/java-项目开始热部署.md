@@ -7,6 +7,9 @@ draft: false
 categories: ["Java开发", "IntelliJ IDEA", "Spring Boot", "开发工具"]
 ---
 
+参考文章
+https://longsheng.org/post/20359.html
+
 # IntelliJ IDEA 热部署教程
 
 ## 📚 什么是热部署？
