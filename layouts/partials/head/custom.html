@@ -26,7 +26,7 @@
         .sidebar-fold-btn {
             position: fixed;
             left: 12px;
-            top: 80px;
+            bottom: 14px;
             z-index: 1300;
             display: inline-flex;
             align-items: center;
@@ -82,7 +82,7 @@
 
             const updateLabel = () => {
                 const collapsed = doc.classList.contains('sidebar-collapsed');
-                btn.textContent = collapsed ? '展开侧栏' : '折叠侧栏';
+                btn.textContent = collapsed ? '展开' : '折叠';
             };
 
             btn.addEventListener('click', () => {
