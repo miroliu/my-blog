@@ -1,6 +1,6 @@
 ---
 title: "前端入门到精通(一)：HTML、CSS与JavaScript基础"
-date: 2025-10-30T09:25:00+08:00
+date: 2025-10-30 09:25:00+08:00
 categories:
   - "编程开发"
 tags:
