@@ -20,5 +20,89 @@
     .js.poem-ready [data-subtitle] {
         opacity: 1;
     }
+
+    /* 侧栏折叠按钮（桌面端，小标签样式，收起后仍可见） */
+    @media (min-width: 960px) {
+        .sidebar-fold-btn {
+            position: fixed;
+            left: 12px;
+            top: 80px;
+            z-index: 1300;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            border-radius: 10px;
+            border: 1px solid var(--card-border-color, #dcdfe6);
+            background: var(--card-background, #fff);
+            color: var(--card-text-color-main, #333);
+            font-size: 12px;
+            line-height: 1;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .sidebar-fold-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+        }
+
+        .sidebar-fold-btn:active {
+            transform: translateY(0);
+        }
+
+        .sidebar-collapsed .left-sidebar {
+            display: none !important;
+        }
+
+        .sidebar-collapsed .main-container {
+            padding-left: 0 !important;
+        }
+    }
 </style>
 <script src="/js/poem.js" defer></script>
+<script>
+    (function () {
+        const doc = document.documentElement;
+        const key = 'sidebar-collapsed';
+
+        function applyCollapsed(on) {
+            doc.classList[on ? 'add' : 'remove']('sidebar-collapsed');
+        }
+
+        function renderButton() {
+            // 仅桌面显示
+            if (window.matchMedia('(max-width: 959px)').matches) return;
+            if (document.querySelector('.sidebar-fold-btn')) return;
+
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'sidebar-fold-btn';
+
+            const updateLabel = () => {
+                const collapsed = doc.classList.contains('sidebar-collapsed');
+                btn.textContent = collapsed ? '展开侧栏' : '折叠侧栏';
+            };
+
+            btn.addEventListener('click', () => {
+                const next = !doc.classList.contains('sidebar-collapsed');
+                applyCollapsed(next);
+                localStorage.setItem(key, next ? '1' : '0');
+                updateLabel();
+            });
+
+            document.body.appendChild(btn);
+            updateLabel();
+        }
+
+        const initial = localStorage.getItem(key) === '1';
+        applyCollapsed(initial);
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderButton, { once: true });
+        } else {
+            renderButton();
+        }
+    })();
+</script>
