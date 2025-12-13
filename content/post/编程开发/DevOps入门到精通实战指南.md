@@ -1,7 +1,7 @@
 ---
 title: DevOps 入门到精通实战指南
 description: 从零到一构建持续交付体系的分阶段路线与实践清单
-date: 2025-11-25 10:00:00+08:00
+date: 2025-12-01 10:00:00+08:00
 image:
 math:
 license:
