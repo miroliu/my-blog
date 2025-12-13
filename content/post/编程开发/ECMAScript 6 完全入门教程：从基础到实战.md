@@ -1,7 +1,7 @@
 ---
 title: ECMAScript 6 完全入门教程：从基础到实战
 description: 系统全面的 ES6 学习指南，涵盖 let/const、箭头函数、解构赋值、Promise、async/await 等核心特性
-date: 2025-12-09 12:00:00+08:00
+date: 2025-12-09 07:00:00+08:00
 image:
 math:
 license:
