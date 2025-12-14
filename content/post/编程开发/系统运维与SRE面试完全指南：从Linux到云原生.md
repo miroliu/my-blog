@@ -1,7 +1,7 @@
 ---
 title: 系统运维与SRE面试完全指南：从Linux到云原生
 description: 全面系统的运维和SRE面试指南，涵盖Linux、网络、容器、Kubernetes、监控、故障处理等所有面试要点
-date: 2025-12-10 10:00:00+08:00
+date: 2025-12-10 18:00:00+08:00
 image:
 math:
 license:
