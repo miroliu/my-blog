@@ -392,3 +392,4 @@ kubectl rollout undo deployment/my-app --to-revision=2
 如果你愿意，后续我们可以再写一篇「结合 CI/CD（比如 GitLab CI / GitHub Actions），从 Git 提交自动构建 Docker 镜像并部署到 K8s」的进阶教程，把整个流程完全自动化。\
 
 
+
