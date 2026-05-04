@@ -2,7 +2,7 @@
 title: "从晶体管到AI：一张图揭示计算机科学所有知识的神秘联系"
 description: "用一条逻辑主线，串联起计算机科学中最核心的知识模块：晶体管、冯诺依曼架构、编程语言、操作系统、网络、数据库、分布式系统、人工智能。"
 slug: "cs-knowledge-interconnection-map"
-date: 2026-05-04T10:30:00+08:00
+date: 2026-05-02T10:30:00+08:00
 image: ""
 math: false
 license: "CC BY-NC-SA 4.0"
@@ -10,6 +10,7 @@ hidden: false
 comments: true
 draft: false
 categories: ["技术分享"]
+
 ---
 
 # 从晶体管到AI：一张图揭示计算机科学所有知识的神秘联系
