@@ -2,7 +2,7 @@
 title: "LVS + Keepalived + HAProxy：企业级负载均衡三剑客完全指南"
 description: "从理论到实操，系统讲解LVS四层负载均衡原理、Keepalived VRRP高可用、HAProxy七层负载均衡与ACL策略，附完整配置示例与生产架构设计。"
 slug: "lvs-keepalived-haproxy-complete-guide"
-date: 2026-05-04T17:00:00+08:00
+date: 2026-05-03T17:00:00+08:00
 image: ""
 math: false
 license: "CC BY-NC-SA 4.0"
@@ -70,15 +70,15 @@ categories: ["技术分享"]
 
 这是负载均衡最核心的概念区分，面试必问。
 
-| 对比维度 | 四层负载均衡（LVS） | 七层负载均衡（HAProxy/Nginx） |
-|---------|----------------|--------------------------|
-| 工作层级 | TCP/UDP层（IP + 端口） | 应用层（HTTP/HTTPS/FTP等） |
-| 转发依据 | 源/目的IP + 端口 | URL路径、Header、Cookie、请求内容 |
-| 性能 | 极高（内核态处理，无协议解析） | 较高（需解析HTTP内容） |
-| 功能深度 | 基础分发 + 健康检查 | 路由策略、ACL、 rewrite、限流、WAF |
-| 场景 | 大流量基础分发 | 细粒度路由、Web加速、安全防护 |
-| 代表工具 | LVS | HAProxy、Nginx |
-| 理解难度 | 难（涉及内核和NAT/DR原理） | 中（配置直观） |
+| 对比维度 | 四层负载均衡（LVS）            | 七层负载均衡（HAProxy/Nginx）      |
+| -------- | ------------------------------ | ---------------------------------- |
+| 工作层级 | TCP/UDP层（IP + 端口）         | 应用层（HTTP/HTTPS/FTP等）         |
+| 转发依据 | 源/目的IP + 端口               | URL路径、Header、Cookie、请求内容  |
+| 性能     | 极高（内核态处理，无协议解析） | 较高（需解析HTTP内容）             |
+| 功能深度 | 基础分发 + 健康检查            | 路由策略、ACL、 rewrite、限流、WAF |
+| 场景     | 大流量基础分发                 | 细粒度路由、Web加速、安全防护      |
+| 代表工具 | LVS                            | HAProxy、Nginx                     |
+| 理解难度 | 难（涉及内核和NAT/DR原理）     | 中（配置直观）                     |
 
 > **企业实际做法**：LVS/HAProxy做入口流量分发（七层精确控制），LVS直连后端RS做四层高速转发。"四层+七层"组合是目前最常见的高性能架构。
 
@@ -100,10 +100,10 @@ LVS的转发性能可以达到**几十万甚至上百万每秒并发**，远超H
 
 ```
 客户端（CIP → VIP）  →  LVS Director  →  Real Server（RS）
-                          NAT转换            SNAT/DNAT             
+                          NAT转换            SNAT/DNAT
 
 客户端 ←（响应数据）←   LVS Director  ←  Real Server
-        CIP ← VIP            ↑                  
+        CIP ← VIP            ↑
                       DNAT转换后           CIP ← RIP
 ```
 
@@ -163,13 +163,13 @@ route add default gw 192.168.10.10
 
 **三种模式对比：**
 
-| 维度 | NAT | DR | TUN |
-|------|-----|-----|-----|
-| 性能 | 低（双向NAT） | 高（单向L2转发） | 高 |
-| RS网络要求 | 与LVS同网段 | 与LVS同网段 | 可跨网段 |
-| 端口映射 | 支持 | 不支持 | 不支持 |
-| 常用场景 | 小规模内部 | **生产环境首选** | 跨地域集群 |
-| 配置复杂度 | RS需改网关 | RS需抑制ARP | RS需隧道支持 |
+| 维度       | NAT           | DR               | TUN          |
+| ---------- | ------------- | ---------------- | ------------ |
+| 性能       | 低（双向NAT） | 高（单向L2转发） | 高           |
+| RS网络要求 | 与LVS同网段   | 与LVS同网段      | 可跨网段     |
+| 端口映射   | 支持          | 不支持           | 不支持       |
+| 常用场景   | 小规模内部    | **生产环境首选** | 跨地域集群   |
+| 配置复杂度 | RS需改网关    | RS需抑制ARP      | RS需隧道支持 |
 
 ### 2.3 LVS核心概念
 
@@ -197,16 +197,16 @@ Client（客户端）
 
 **LVS调度算法（8种核心算法）：**
 
-| 算法 | 命令关键字 | 原理 | 适用场景 |
-|------|----------|------|---------|
-| 轮询 | rr | 每个请求依次发给下一个RS | 服务器性能相同 |
-| 加权轮询 | wrr | 按权重比例分发 | 服务器性能不同时 |
-| 最少连接 | lc | 发给当前连接数最少的RS | 长连接业务 |
-| 加权最少连接 | wlc | 优先级×连接数综合评估 | 混合性能场景 |
-| 源地址哈希 | sh | 同一源IP永远发到同一RS | 会话保持 |
-| 目标地址哈希 | dh | 同一目标IP发到同一RS | 缓存命中优化 |
-| 最短期望延迟 | sed | (active*256+inactive)/weight | NQ算法改进版 |
-| 永不排队 | nq | 有空闲RS立即分配 | 高并发短连接 |
+| 算法         | 命令关键字 | 原理                          | 适用场景         |
+| ------------ | ---------- | ----------------------------- | ---------------- |
+| 轮询         | rr         | 每个请求依次发给下一个RS      | 服务器性能相同   |
+| 加权轮询     | wrr        | 按权重比例分发                | 服务器性能不同时 |
+| 最少连接     | lc         | 发给当前连接数最少的RS        | 长连接业务       |
+| 加权最少连接 | wlc        | 优先级×连接数综合评估         | 混合性能场景     |
+| 源地址哈希   | sh         | 同一源IP永远发到同一RS        | 会话保持         |
+| 目标地址哈希 | dh         | 同一目标IP发到同一RS          | 缓存命中优化     |
+| 最短期望延迟 | sed        | (active\*256+inactive)/weight | NQ算法改进版     |
+| 永不排队     | nq         | 有空闲RS立即分配              | 高并发短连接     |
 
 ### 2.4 LVS实操：ipvsadm 命令详解
 
@@ -414,18 +414,18 @@ vrrp_instance VI_1 {
     advert_int 1         # 心跳间隔（秒），Master每1秒发一次VRRP广告
     nopreempt            # 非抢占模式（推荐生产使用，避免频繁切换）
     # preempt_delay 300   # 抢占延迟（故障恢复后等待5分钟再抢回）
-    
+
     authentication {     # VRRP认证，防止伪造VRRP包
         auth_type PASS    # 简单密码认证
         auth_pass 1111    # 密码（同一VRRP组内必须一致）
     }
-    
+
     # VIP定义（对外提供服务的虚拟IP）
     virtual_ipaddress {
         192.168.10.100/24 dev eth0    # VIP和绑定网卡
         # 192.168.10.101/24 dev eth0  # 支持多个VIP
     }
-    
+
     # 通知脚本（状态变化时发送告警）
     notify_master "/etc/keepalived/notify.sh master"
     notify_backup "/etc/keepalived/notify.sh backup"
@@ -439,12 +439,12 @@ virtual_server 192.168.10.100 80 {
     lb_kind DR              # LVS模式：NAT/TUN/DR
     persistence_timeout 20  # 会话保持时间（秒）
     protocol TCP           # 协议类型：TCP/UDP
-    
+
     # Real Server 1
     real_server 192.168.10.21 80 {
         weight 3           # 权重（数值越大，分到的请求越多）
         inhibit_on_failure # 当健康检查失败时，将权重设为0而不是删除RS
-        
+
         # 健康检查方式：HTTP_GET（推荐，比TCP更准确）
         HTTP_GET {
             url {
@@ -455,14 +455,14 @@ virtual_server 192.168.10.100 80 {
             nb_get_retry 3        # 重试3次
             delay_before_retry 2  # 重试间隔2秒
         }
-        
+
         # 简单TCP检查（轻量）
         # TCP_CHECK {
         #     connect_port 80
         #     connect_timeout 3
         # }
     }
-    
+
     # Real Server 2
     real_server 192.168.10.22 80 {
         weight 2
@@ -511,7 +511,7 @@ virtual_server 192.168.10.100 80 {
     lb_kind DR
     persistence_timeout 20
     protocol TCP
-    
+
     real_server 192.168.10.21 80 {
         weight 3
         HTTP_GET {
@@ -519,7 +519,7 @@ virtual_server 192.168.10.100 80 {
             connect_timeout 3; nb_get_retry 3; delay_before_retry 2;
         }
     }
-    
+
     real_server 192.168.10.22 80 {
         weight 2
         HTTP_GET {
@@ -660,15 +660,15 @@ real_server 192.168.10.21 80 {
 
 ### 4.1 HAProxy vs LVS：什么时候用HAProxy
 
-| 场景 | 推荐工具 | 原因 |
-|------|---------|------|
-| 超大流量入口（10万+ QPS） | LVS | 内核态，性能最高 |
-| 需要URL路由/A/B测试 | HAProxy | 七层解析能力 |
-| HTTPS卸载（SSL证书） | HAProxy | 内置SSL终结 |
-| HTTP Header改写/重定向 | HAProxy | 正则改写 |
-| 灰度/金丝雀发布 | HAProxy | ACL细粒度路由 |
-| MySQL/Redis负载均衡 | HAProxy | TCP层代理 |
-| 日志/限流/WAF | HAProxy | 丰富的ACL和日志 |
+| 场景                      | 推荐工具 | 原因             |
+| ------------------------- | -------- | ---------------- |
+| 超大流量入口（10万+ QPS） | LVS      | 内核态，性能最高 |
+| 需要URL路由/A/B测试       | HAProxy  | 七层解析能力     |
+| HTTPS卸载（SSL证书）      | HAProxy  | 内置SSL终结      |
+| HTTP Header改写/重定向    | HAProxy  | 正则改写         |
+| 灰度/金丝雀发布           | HAProxy  | ACL细粒度路由    |
+| MySQL/Redis负载均衡       | HAProxy  | TCP层代理        |
+| 日志/限流/WAF             | HAProxy  | 丰富的ACL和日志  |
 
 ### 4.2 HAProxy核心配置结构
 
@@ -708,17 +708,17 @@ listen stats_page
 frontend http_front
     bind *:80                   # 监听所有网卡的80端口
     bind *:443 ssl crt /etc/ssl/certs/server.pem  # HTTPS
-    
+
     # ACL规则：按路径路由
     acl url_static path_beg -i /static /images /css /js
     acl url_api path_beg -i /api /v1 /v2
     acl url_admin path_beg -i /admin /manage
-    
+
     # 使用backend
     use_backend static_backend if url_static
     use_backend api_backend if url_api
     use_backend admin_backend if url_admin
-    
+
     # 默认backend（未匹配以上规则时）
     default_backend web_backend
 
@@ -727,16 +727,16 @@ backend web_backend
     mode http
     balance roundrobin           # 负载均衡算法
     # 算法选项：roundrobin/leastconn/source/uri/hdr
-    
+
     # 健康检查
     option httpchk GET /health.html
     http-check expect status 200
-    
+
     # Real Server列表
     server web1 192.168.10.21:80 check inter 2000 rise 2 fall 3
     server web2 192.168.10.22:80 check inter 2000 rise 2 fall 3
     server web3 192.168.10.23:80 check inter 2000 rise 2 fall 3
-    
+
     # 参数说明：
     # check：开启健康检查
     # inter 2000：每2秒检查一次
@@ -764,25 +764,25 @@ ACL（Access Control List）是HAProxy的灵魂，用好ACL可以实现精细的
 
 frontend web_front
     bind *:80
-    
+
     # ACL：按Cookie判断用户群体（运营/内测）
     acl is_beta_user hdr_reg(Cookie,.*beta=1.*) -m found
     acl is_vip_user hdr(Cookie) -m sub VIP
-    
+
     # ACL：按URL路径（不同接口走不同集群）
     acl is_admin path_beg /admin /manage /internal
-    
+
     # ACL：按源IP白名单
     acl is_office src 10.0.0.0/8
     acl is_office src 172.16.0.0/12
     acl is_office src 192.168.0.0/16
-    
+
     # ACL：按请求头（X-Request-ID存在）
     acl has_trace hdr(X-Request-ID) -m found
-    
+
     # ACL：按User-Agent（移动端）
     acl is_mobile hdr(User-Agent) -i mobile|android|iphone
-    
+
     # 路由策略
     # Beta用户走新版本集群
     use_backend web_v2 if is_beta_user
@@ -928,7 +928,7 @@ virtual_server 202.96.128.100 80 {
     lb_kind DR
     persistence_timeout 30
     protocol TCP
-    
+
     # 三台HAProxy作为RS
     real_server 192.168.10.101 80 { weight 3; TCP_CHECK { connect_port 80; connect_timeout 3; } }
     real_server 192.168.10.102 80 { weight 3; TCP_CHECK { connect_port 80; connect_timeout 3; } }
@@ -1010,18 +1010,19 @@ ab -n 10000 -c 500 http://202.96.128.100/index.html
 
 ## 六、总结：三种工具的选型决策
 
-| 场景 | 推荐方案 | 理由 |
-|------|---------|------|
-| 小网站（QPS < 1000） | Nginx单节点 | 简单，零配置 |
-| 中型网站（QPS 1000-5万） | HAProxy + 多RS | 成本低，功能强 |
-| 大型互联网（QPS 5万+） | LVS(DR) + HAProxy + Keepalived | 最强性能 + 高可用 |
-| 金融/高可用要求极高 | 双LVS + 双HAProxy集群 | 双重高可用 |
-| 需要SSL卸载 | HAProxy层做SSL终结 | HAProxy原生支持 |
-| 需要精确URL路由 | HAProxy ACL | 七层解析能力 |
-| 超高并发（50万+ QPS） | LVS DR直连后端Nginx | 减少一层转发 |
+| 场景                     | 推荐方案                       | 理由              |
+| ------------------------ | ------------------------------ | ----------------- |
+| 小网站（QPS < 1000）     | Nginx单节点                    | 简单，零配置      |
+| 中型网站（QPS 1000-5万） | HAProxy + 多RS                 | 成本低，功能强    |
+| 大型互联网（QPS 5万+）   | LVS(DR) + HAProxy + Keepalived | 最强性能 + 高可用 |
+| 金融/高可用要求极高      | 双LVS + 双HAProxy集群          | 双重高可用        |
+| 需要SSL卸载              | HAProxy层做SSL终结             | HAProxy原生支持   |
+| 需要精确URL路由          | HAProxy ACL                    | 七层解析能力      |
+| 超高并发（50万+ QPS）    | LVS DR直连后端Nginx            | 减少一层转发      |
 
 ---
 
-*关联文章：*
-- *《企业网络路由协议选型与核心技术指南》——负载均衡的下层网络架构设计*
-- *《Istio服务网格完全指南》——Service Mesh层面的流量管理*
+_关联文章：_
+
+- _《企业网络路由协议选型与核心技术指南》——负载均衡的下层网络架构设计_
+- _《Istio服务网格完全指南》——Service Mesh层面的流量管理_
