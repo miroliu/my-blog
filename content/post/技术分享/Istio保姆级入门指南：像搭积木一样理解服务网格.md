@@ -2,7 +2,7 @@
 title: "Istio保姆级入门指南：像搭积木一样理解服务网格，每个组件掰开讲"
 description: "从零开始，用生活化的比喻和逐行图解拆解Istio的每个组件——Sidecar怎么工作的？Pilot是什么？为什么需要mTLS？一次讲清楚，不留盲区。"
 slug: "istio-beginner-friendly-deep-explanation"
-date: 2026-05-04T18:00:00+08:00
+date: 2026-05-03T18:00:00+08:00
 image: ""
 math: false
 license: "CC BY-NC-SA 4.0"
