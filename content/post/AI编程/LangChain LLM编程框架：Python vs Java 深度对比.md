@@ -1,7 +1,7 @@
 ---
 title: "LangChain LLM编程框架：Python vs Java 深度对比"
 description: "深入对比LangChain在Python和Java两大生态中的实现差异、核心特性、性能表现，以及Java打包体积大的根本原因和优化方案"
-date: 2026-06-08T09:43:00+08:00
+date: 2026-06-11T09:43:00+08:00
 categories: ["AI编程"]
 tags:
   - LangChain
@@ -706,4 +706,4 @@ public class Main {
 
 ---
 
-*希望这篇文章帮你理清了Python和Java在LangChain生态中的选择思路。如果觉得有用，欢迎分享给有同样困惑的同事。*
+_希望这篇文章帮你理清了Python和Java在LangChain生态中的选择思路。如果觉得有用，欢迎分享给有同样困惑的同事。_
