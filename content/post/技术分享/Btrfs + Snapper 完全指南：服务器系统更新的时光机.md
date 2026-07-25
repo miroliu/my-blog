@@ -2,7 +2,7 @@
 title: "Btrfs + Snapper 完全指南：服务器系统更新的"时光机" — 自动快照与一键回滚实战"
 description: "运维人员的噩梦：yum update 之后系统崩了？别让一次更新毁掉你的周末！本文详解如何使用 Btrfs 文件系统 + Snapper 工具为服务器打造自动化的"时光机"——升级前自动快照、升级失败一键回滚、Snapper 定时快照策略、与包管理器集成、跨快照 diff、备份集成，让你的 Linux 服务器拥有"任意回档"的超能力。"
 slug: "btrfs-snapper-server-time-machine-auto-snapshot-rollback"
-date: 2026-07-19T12:30:00+08:00
+date: 2026-07-19T17:00:00+08:00
 math: false
 license: "CC BY-NC-SA 4.0"
 hidden: false
@@ -119,13 +119,13 @@ Snapper 工具（自动创建/清理快照）
 
 ### 1.3 适合谁
 
-| 用户 | 适合程度 | 原因 |
-|------|---------|------|
-| **个人 Linux 桌面** | ⭐⭐⭐⭐⭐ | Manjaro / openSUSE Tumbleweed 默认启用 |
-| **服务器管理员** | ⭐⭐⭐⭐⭐ | 系统升级前自动快照 |
-| **企业运维** | ⭐⭐⭐⭐ | 与自动化运维集成 |
-| **开发者本地 VM** | ⭐⭐⭐⭐⭐ | 系统折腾不怕坏 |
-| **生产数据库服务器** | ⭐⭐⭐ | 不推荐（数据库有自己的备份方案） |
+| 用户                 | 适合程度   | 原因                                   |
+| -------------------- | ---------- | -------------------------------------- |
+| **个人 Linux 桌面**  | ⭐⭐⭐⭐⭐ | Manjaro / openSUSE Tumbleweed 默认启用 |
+| **服务器管理员**     | ⭐⭐⭐⭐⭐ | 系统升级前自动快照                     |
+| **企业运维**         | ⭐⭐⭐⭐   | 与自动化运维集成                       |
+| **开发者本地 VM**    | ⭐⭐⭐⭐⭐ | 系统折腾不怕坏                         |
+| **生产数据库服务器** | ⭐⭐⭐     | 不推荐（数据库有自己的备份方案）       |
 
 ---
 
@@ -615,6 +615,7 @@ sudo snapper undochange -f 5..6 /usr
 ```
 
 **注意**：
+
 - `undochange` 会在当前运行的系统上回滚文件，可能导致正在运行的程序崩溃
 - 回滚 `/etc` 风险较高（可能影响正在运行的服务的配置）
 - 推荐场景：升级失败后，在重启**之前**先 undochange，或者干脆重启进 snapshot
@@ -638,8 +639,9 @@ sudo systemctl enable --now snapper-cleanup.timer    # 每天清理过期快照
 ```
 
 **默认行为**：
+
 - `snapper-timeline.timer`：每小时一次时间线快照
-- `snapper-cleanup.timer`：每天一次清理过期快照（按 TIMELINE_LIMIT_* 配置）
+- `snapper-cleanup.timer`：每天一次清理过期快照（按 TIMELINE*LIMIT*\* 配置）
 
 ### 6.2 snap-pac 的 pre/post 行为
 
@@ -1011,13 +1013,13 @@ fi
 
 ## 十二、与其他快照工具对比
 
-| 工具 | 文件系统 | 集成方式 | 适合场景 |
-|------|---------|---------|---------|
-| **Snapper** | Btrfs | 包管理器钩子 | 服务器系统盘 |
-| **LVM 快照** | LVM | 手动 | 老旧 LVM 系统 |
-| **Timeshift** | Btrfs / rsync | 手动 + 定时 | 桌面用户 |
-| **ZFS Auto-Snapshot** | ZFS | cron | FreeBSD / NAS |
-| **rsnapshot** | 任意 | cron + rsync | 通用备份 |
+| 工具                  | 文件系统      | 集成方式     | 适合场景      |
+| --------------------- | ------------- | ------------ | ------------- |
+| **Snapper**           | Btrfs         | 包管理器钩子 | 服务器系统盘  |
+| **LVM 快照**          | LVM           | 手动         | 老旧 LVM 系统 |
+| **Timeshift**         | Btrfs / rsync | 手动 + 定时  | 桌面用户      |
+| **ZFS Auto-Snapshot** | ZFS           | cron         | FreeBSD / NAS |
+| **rsnapshot**         | 任意          | cron + rsync | 通用备份      |
 
 **Snapper 的独特优势**：**与包管理器深度集成**——其他工具都做不到"升级前自动快照"。
 
