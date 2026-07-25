@@ -1,6 +1,6 @@
 ---
-title: "Btrfs + Snapper 完全指南：服务器系统更新的"时光机" — 自动快照与一键回滚实战"
-description: "运维人员的噩梦：yum update 之后系统崩了？别让一次更新毁掉你的周末！本文详解如何使用 Btrfs 文件系统 + Snapper 工具为服务器打造自动化的"时光机"——升级前自动快照、升级失败一键回滚、Snapper 定时快照策略、与包管理器集成、跨快照 diff、备份集成，让你的 Linux 服务器拥有"任意回档"的超能力。"
+title: "Btrfs + Snapper 完全指南：服务器系统更新的「时光机」 — 自动快照与一键回滚实战"
+description: "运维人员的噩梦：yum update 之后系统崩了？别让一次更新毁掉你的周末！本文详解如何使用 Btrfs 文件系统 + Snapper 工具为服务器打造自动化的「时光机」——升级前自动快照、升级失败一键回滚、Snapper 定时快照策略、与包管理器集成、跨快照 diff、备份集成，让你的 Linux 服务器拥有「任意回档」的超能力。"
 slug: "btrfs-snapper-server-time-machine-auto-snapshot-rollback"
 date: 2026-07-19T17:00:00+08:00
 math: false
