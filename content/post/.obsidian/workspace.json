@@ -1,0 +1,221 @@
+{
+  "main": {
+    "id": "70258a518c4b4ff6",
+    "type": "split",
+    "children": [
+      {
+        "id": "fde72c44a6f6053c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a57a242c84d3191d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "云原生/Kubernetes速成指南：从入门到实践 copy.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Kubernetes速成指南：从入门到实践 copy"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d63b92ba99cbc7c6",
+    "type": "split",
+    "children": [
+      {
+        "id": "cf2ae614a1233e86",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "97d81f07d122c34b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "8be12eb072654398",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "1f244fc09facbf50",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "1ee7ac52c45f624c",
+    "type": "split",
+    "children": [
+      {
+        "id": "7d2e0fad29bd5aee",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "54b3f91797a13922",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Java/Java高级教程.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Java高级教程 的反向链接列表"
+            }
+          },
+          {
+            "id": "9125dceab1209936",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Java/Java高级教程.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Java高级教程 的出链列表"
+            }
+          },
+          {
+            "id": "31034fbc4e1c551a",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "cbdf6b04106c177c",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Java/Java高级教程.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Java高级教程 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:创建新数据库": false
+    }
+  },
+  "active": "a57a242c84d3191d",
+  "lastOpenFiles": [
+    "云原生/Kubernetes开篇-核心概念与集群搭建指南.md",
+    "云原生/Kubernetes速成指南：从入门到实践 copy.md",
+    "云原生/云原生高级特性与最佳实践.md",
+    "云原生/Docker与容器化：从基础到实践.md",
+    "云原生/Apache Flink运维指南：核心要点与最佳实践.md",
+    "云原生/云原生基础，概念、原则与价值.md",
+    "数据库/MySQL数据库基础：安装、配置与基本操作.md",
+    "数据库/数据库性能优化实战：从查询到存储的全面优化.md",
+    "手写博客/多媒体测试.md",
+    "手写博客/道德经动画版.md",
+    "默认文章/hugo 使用教程.md",
+    "Java/Java高级教程.md",
+    "手写博客/多媒体测试 copy.md",
+    "全栈编程/AI生成播客音频教程.md",
+    "系统运维/黄金架构LNMP-高性能Web服务部署实战.md",
+    "手写博客/测试媒体播放能力.md",
+    "手写博客/index.md",
+    "手写博客",
+    "系统运维/pic/image-20220526171022721.png",
+    "系统运维/pic/image-20220526170737593.png",
+    "系统运维/pic/image-20220526165343953.png",
+    "系统运维/pic/image-20220526163558420.png",
+    "系统运维/pic/image-20220526161144482.png",
+    "系统运维/pic/image-20220526160752662.png",
+    "系统运维/pic/image-20220526160733019.png",
+    "系统运维/pic/image-20220526155436119.png",
+    "系统运维/pic/image-20220526154314423.png",
+    "系统运维/pic/image-20220526154029377.png",
+    "系统运维/01_黄金架构LNMP.md",
+    "系统运维/CI-CD与Git版本控制详解.md",
+    "云原生/k8s开篇.md",
+    "系统运维/01_cicd与git.md",
+    "系统运维/pic copy",
+    "桌面运维/计算机硬件知识与系统配置详解.md",
+    "桌面运维/特殊IP实践与域名解析详解.md",
+    "桌面运维/day02作业解析.md",
+    "桌面运维/pic",
+    "桌面运维/day03今日内容.md",
+    "系统运维/day10今日笔记.md",
+    "系统运维/pic",
+    "lamp与阿里云/pic",
+    "lamp与阿里云/day22_lamp与阿里云.zip",
+    "lamp与阿里云",
+    "云原生/pic",
+    "pic",
+    "全栈编程"
+  ]
+}

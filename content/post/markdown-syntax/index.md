@@ -7,9 +7,7 @@ tags:
   - css
   - html
   - themes
-categories:
-  - themes
-  - syntax
+categories: ["markdown-syntax"]
 draft: true
 ---
 
